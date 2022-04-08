@@ -1,0 +1,25 @@
+{
+  "name": "combobox",
+  "version": "1.0.0",
+  "description": "A combobox is an input widget with an associated popup that enables users to select a value for the combobox from a collection of possible values. In some implementations, the popup presents allowed values, while in other implementations, the popup presents suggested values, and users may either select one of the suggestions or type a value.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "npx tailwindcss -i .styles.css -o ./dist/built.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Makavura/ComboBox.git"
+  },
+  "keywords": [
+    "ComboBox"
+  ],
+  "author": "Makavura Mughanga",
+  "bugs": {
+    "url": "https://github.com/Makavura/ComboBox/issues"
+  },
+  "homepage": "https://github.com/Makavura/ComboBox#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.0.23"
+  }
+}
