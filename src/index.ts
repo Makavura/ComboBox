@@ -1,4 +1,7 @@
+
 import countries from "./countries";
+// @ts-ignore
+import * as themeTogglerEventListener from './theme.toggler';
 
 const comboBoxInput = document.getElementById('combo-input-box');
 const comboBoxUpIcon = document.getElementById('combo-up-icon');
@@ -6,16 +9,14 @@ const comboBoxDownIcon = document.getElementById('combo-down-icon');
 const comboBoxCountryListing = document.getElementById('combo-country-listing');
 const comboBoxLabel = document.getElementById('combo-input-label');
 
-(() => {
-
-
+const init = () => {
     generateListing(countries);
-});
+};
 
 const generateListing = (countries: Country[]) => {
     countries.forEach((country: Country, index: number) => {
 
-    });
+    }); 
 };
 
 interface Country {
@@ -69,10 +70,12 @@ const setDefaultLabelState = () => {
 };
 
 const computeDistanceFromEndOfPage = () => {
-    
+
 };
 
 const updateInputWithSelectedListItem = (selection: string) => {
     // @ts-ignore
     comboBoxInput?.nodeValue = selection;
 };
+
+init();
