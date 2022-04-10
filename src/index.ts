@@ -129,17 +129,25 @@ const updateInputWithSelectedListItem = (selection: string) => {
     comboBoxInput?.nodeValue = selection;
 };
 comboBoxDownIcon?.addEventListener('click', () => {
+    showList();
+});
+comboBoxUpIcon?.addEventListener('click', () => {
+    hideList();
+});
+
+const showList = () => {
     hideDownIcon();
     showUpIcon();
     showComboBoxList();
     minimizeAndTranslateLabel();
-});
-comboBoxUpIcon?.addEventListener('click', () => {
+};
+
+const hideList = () => {
     hideUpIcon();
     showDownIcon();
     hideComboBoxList();
     setDefaultLabelState();
-});
+};
 
 comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
     e.preventDefault();
@@ -151,19 +159,34 @@ comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
     }
     console.log(selectionValue);
     // @ts-ignore
-    comboBoxInput?.innerHTML = selectionValue;
+    comboBoxInput?.innerText = selectionValue;
+});
+
+comboBoxInput?.addEventListener('click', (e: Event) => {
+    showList();
+});
+
+comboBoxInput?.addEventListener('focus', (e: Event) => {
+    showList();
+});
+
+comboBoxInput?.addEventListener('keyup', (e: Event) => {
+    console.log(e)
+    // @ts-ignore
+    if(e.isComposing || e.keyCode === 27) {
+        hideList();
+    };
 });
 
 comboBoxInput?.addEventListener('change', (e: Event) => {
-
-    if (!null) {
+    console.log(e.target);
+    if (false) {
         // @ts-ignore
-        const filteredCountries: Country[] = filterCountryListing(e.target?.nativeElement.value);
+        const filteredCountries: Country[] = filterCountryListing(e.target?.value);
         if (filteredCountries.length > 1) {
             clearListing();
             generateListing(filteredCountries);
         };
-
     };
 
 });
