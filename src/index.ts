@@ -1,5 +1,5 @@
 
-import countries from "./countries";
+import allCountries from "./countries";
 import { countryFlags } from "./country.flags";
 // @ts-ignore
 import * as themeTogglerEventListener from './theme.toggler';
@@ -12,7 +12,7 @@ const comboBoxLabel = document.getElementById('combo-input-label-span');
 const comboBoxCountryListingList = document.getElementById('combo-country-listing-list');
 
 const init = () => {
-    generateListing(countries);
+    generateListing(allCountries);
 };
 
 const generateListing = (countries: Country[]) => {
@@ -51,7 +51,7 @@ const generateListing = (countries: Country[]) => {
 };
 
 const filterCountryListing = (key: string): Country[] => {
-    const filteredCountries: Country[] = countries.filter((country) => {
+    const filteredCountries: Country[] = allCountries.filter((country) => {
         return country.label.includes(key) || country.code.includes(key) || country.phone.includes(key)
     });
     return filteredCountries;
@@ -149,6 +149,14 @@ const hideList = () => {
     setDefaultLabelState();
 };
 
+const filterClearAndGenerateListing = (filterString: string): void => {
+    const filteredCountries: Country[] = filterCountryListing(filterString);
+    if (filteredCountries.length > 1) {
+        clearListing();
+        generateListing(filteredCountries);
+    };
+};
+
 comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
     e.preventDefault();
     let selectionValue = '';
@@ -171,24 +179,29 @@ comboBoxInput?.addEventListener('focus', (e: Event) => {
 });
 
 comboBoxInput?.addEventListener('keyup', (e: Event) => {
-    console.log(e)
     // @ts-ignore
-    if(e.isComposing || e.keyCode === 27) {
+    if (e.isComposing || e.keyCode === 27) {
         hideList();
     };
 });
 
-comboBoxInput?.addEventListener('change', (e: Event) => {
-    console.log(e.target);
-    if (false) {
+comboBoxInput?.addEventListener('keyup', (e: Event) => {
+    // @ts-ignore
+    if (e.code === "Backspace") {
         // @ts-ignore
-        const filteredCountries: Country[] = filterCountryListing(e.target?.value);
-        if (filteredCountries.length > 1) {
-            clearListing();
-            generateListing(filteredCountries);
-        };
+        const filterString = e.target?.value;
+        filterClearAndGenerateListing(filterString);
     };
+});
 
+
+comboBoxInput?.addEventListener('keypress', (e: Event) => {
+    // @ts-ignore
+    if (e.keyCode !== 27) {
+        // @ts-ignore
+        const filterString = e.target?.value;
+        filterClearAndGenerateListing(filterString);
+    };
 });
 
 
