@@ -29,24 +29,37 @@ const generateListing = (countries: Country[]) => {
 
     countriesWithFlags.forEach((country: CountryWithFlag) => {
         const listItem = `
-        <li class="flex flex-row w-full justify-between border border-gray-300 p-2">
-            <span class="grow-0">
+        <li class="flex flex-row w-full border border-gray-300 p-2">
+            <span class="w-6">
                 ${country.flag}
             </span>
-            <span>
+            <span class="w-8">
                 ${country.code}
             </span>
-            <span>
+            <span class="w-8">
                 ${country.phone}
             </span>
-            <p>
+            <p class="w-max">
                 ${country.label}
             </p>
         </li>
         `;
         listing += listItem;
     });
-    comboBoxCountryListingList?.append(listing);
+    // @ts-ignore
+    comboBoxCountryListingList?.innerHTML = listing;
+};
+
+const filterCountryListing = (key: string): Country[] => {
+    const filteredCountries: Country[] = countries.filter((country) => {
+        return country.label.includes(key) || country.code.includes(key) || country.phone.includes(key)
+    });
+    return filteredCountries;
+};
+
+const clearListing = (): void => {
+    // @ts-ignore
+    comboBoxCountryListingList?.innerHTML = '';
 };
 
 interface Country {
@@ -67,7 +80,7 @@ export interface CountryWithFlag extends Country {
     flag: string;
 };
 
-const showComboBoxListing = () => {
+const showComboBoxList = () => {
     //@ts-ignore
     comboBoxCountryListing?.style.display = 'block';
 };
@@ -119,7 +132,44 @@ const updateInputWithSelectedListItem = (selection: string) => {
     // @ts-ignore
     comboBoxInput?.nodeValue = selection;
 };
+comboBoxDownIcon?.addEventListener('click', () => {
+    hideDownIcon();
+    showUpIcon();
+    showComboBoxList();
+    minimizeAndTranslateLabel();
+});
+comboBoxUpIcon?.addEventListener('click', () => {
+    hideUpIcon();
+    showDownIcon();
+    hideComboBoxList();
+    setDefaultLabelState();
+});
 
+comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
+    let selectionValue = '';
+    // @ts-ignore
+    for (let i = 0; i < e.target.children.length; i++) {
+        // @ts-ignore
+        selectionValue += e.target.children[i].innerText + ' ';
+    }
+    console.log(selectionValue);
+    // @ts-ignore
+    comboBoxInput?.innerHTML = selectionValue;
+});
+
+comboBoxInput?.addEventListener('change', (e: Event) => {
+
+    if (e.target) {
+        // @ts-ignore
+        const filteredCountries: Country[] = filterCountryListing(e.target?.nativeElement.value);
+        if (filteredCountries.length > 1) {
+            clearListing();
+            generateListing(filteredCountries);
+        };
+
+    };
+
+});
 
 
 init();
