@@ -159,7 +159,7 @@ comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
     }
     console.log(selectionValue);
     // @ts-ignore
-    comboBoxInput?.innerText = selectionValue;
+    comboBoxInput?.value = selectionValue;
 });
 
 comboBoxInput?.addEventListener('click', (e: Event) => {
