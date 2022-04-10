@@ -8,7 +8,7 @@ const comboBoxInput = document.getElementById('combo-input-box');
 const comboBoxUpIcon = document.getElementById('combo-up-icon');
 const comboBoxDownIcon = document.getElementById('combo-down-icon');
 const comboBoxCountryListing = document.getElementById('combo-country-listing');
-const comboBoxLabel = document.getElementById('combo-input-label');
+const comboBoxLabel = document.getElementById('combo-input-label-span');
 const comboBoxCountryListingList = document.getElementById('combo-country-listing-list');
 
 const init = () => {
@@ -111,17 +111,13 @@ const hideDownIcon = () => {
 };
 
 const minimizeAndTranslateLabel = () => {
-    // @ts-ignore
-    comboBoxLabel?.style.scale = '0.75';
-    // @ts-ignore
-    comboBoxLabel?.style.transform = 'translate(14, -9)';
+    comboBoxLabel?.classList.remove('translate-y-2', 'translate-x-2');
+    comboBoxLabel?.classList.add('scale-60', 'translate-x-6', '-translate-y-4');
 };
 
 const setDefaultLabelState = () => {
-    // @ts-ignore
-    comboBoxLabel?.style.scale = '1';
-    // @ts-ignore
-    comboBoxLabel?.style.transform = 'translate(0, 0)';
+    comboBoxLabel?.classList.add('translate-y-2', 'translate-x-2');
+    comboBoxLabel?.classList.remove('scale-60', 'translate-x-6', '-translate-y-4');
 };
 
 const computeDistanceFromEndOfPage = () => {
@@ -146,6 +142,7 @@ comboBoxUpIcon?.addEventListener('click', () => {
 });
 
 comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
+    e.preventDefault();
     let selectionValue = '';
     // @ts-ignore
     for (let i = 0; i < e.target.children.length; i++) {
@@ -159,7 +156,7 @@ comboBoxCountryListingList?.addEventListener('click', (e: Event) => {
 
 comboBoxInput?.addEventListener('change', (e: Event) => {
 
-    if (e.target) {
+    if (!null) {
         // @ts-ignore
         const filteredCountries: Country[] = filterCountryListing(e.target?.nativeElement.value);
         if (filteredCountries.length > 1) {
