@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" />
     <title>Combo Box | An ARIA Implementation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="dist/built.css">
@@ -26,7 +27,6 @@
             if (theme == 'dark') setDarkMode();
         };
     </script>
-    <script src="dist/main.js"></script>
 </head>
 
 <body class="bg-white dark:bg-slate-900">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="grid place-items-center h-screen w-screen">
-        <div class="flex flex-col bg-gray-200 p-10 rounded-lg border border-black dark:border-white w-1/5">
+        <div class="flex flex-col bg-gray-200 p-10 rounded-lg border border-black dark:border-white w-96">
             <div class="flex flex-row bg-white border border-blue-600 rounded-sm">
                 <button class=" w-full mx-auto">
                     <label id="combo-input-label grow min-w-full">
@@ -64,7 +64,7 @@
                     </button>
                 </button>
             </div>
-            <div class="" id="combo-country-listing" style="display: none;">
+            <div class="h-96 overflow-auto" id="combo-country-listing" style="display: none;">
                 <ul class="list-none" id="combo-country-listing-list">
 
                 </ul>
@@ -72,6 +72,7 @@
         </div>
     </div>
     <script src="dist/theme.toggler.js"></script>
+    <script src="dist/main.js"></script>
 </body>
 
 </html>
