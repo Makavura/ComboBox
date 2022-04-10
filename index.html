@@ -42,15 +42,15 @@
 
     <div class="grid place-items-center h-screen w-screen">
         <div class="flex flex-col bg-gray-200 p-10 rounded-lg border border-black dark:border-white w-96">
-            <div class="flex flex-row bg-white border border-blue-600 rounded-sm">
+            <div class="flex flex-row bg-white border border-blue-600 rounded-sm z-0">
                 <button class=" w-full mx-auto">
                     <label id="combo-input-label grow min-w-full">
-                        <span id=""
-                            class="absolute z-1 cursor-pointer pointer-events-none text-black mx-auto block translate-y-2 translate-x-2 ">
+                        <span id="combo-input-label-span"
+                            class="absolute z-10 cursor-pointer pointer-events-none text-black mx-auto block translate-y-2 translate-x-2 ">
                             Countries
                         </span>
                         <input type="text" id="combo-input-box"
-                            class="z-0 p-2 leading-4 focus:border-none focus:outline-none w-full">
+                            class="text-indigo-500 z-0 p-2 leading-4 focus:border-none focus:outline-none w-full">
                     </label>
                     <button class="border-none mx-auto text-indigo-700 font-bold" id="combo-toggler-button">
                         <svg id="combo-up-icon" style="display:none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="h-96 overflow-auto" id="combo-country-listing" style="display: none;">
-                <ul class="list-none" id="combo-country-listing-list">
+                <ul class="list-none cursor-pointer" id="combo-country-listing-list">
 
                 </ul>
             </div>
